@@ -2,6 +2,12 @@ import Head from 'next/head'
 import { styled } from '../stitches.config'
 import { LinkForm } from '../components/link-form'
 import { Output } from '../components/output'
+import {
+    TabsContent,
+    TabsList,
+    TabsRoot,
+    TabsTrigger,
+} from '../components/tabs'
 
 const Box = styled('div', {})
 
@@ -11,8 +17,13 @@ const Text = styled('p', {
 })
 
 const Container = styled('div', {
+    display: 'flex',
+    flexDirection: 'column',
+    height: '100vh',
+    marginY: 0,
     marginX: 'auto',
     paddingX: '$3',
+    paddingY: 0,
 
     variants: {
         size: {
@@ -38,7 +49,18 @@ export default function Home() {
             <Container size={{ '@initial': '1', '@bp1': '2' }}>
                 <Text as="h1">Translate your transcription with AI</Text>
                 <LinkForm />
-                <Output>Hello</Output>
+                <TabsRoot defaultValue="progress">
+                    <TabsList aria-label="Output">
+                        <TabsTrigger value="progress">Progress</TabsTrigger>
+                        <TabsTrigger value="result">Result</TabsTrigger>
+                    </TabsList>
+                    <TabsContent value="progress">
+                        <Output>{'progress here'.repeat(100)}</Output>
+                    </TabsContent>
+                    <TabsContent value="result">
+                        <Output>Result will go here</Output>
+                    </TabsContent>
+                </TabsRoot>
             </Container>
         </Box>
     )
