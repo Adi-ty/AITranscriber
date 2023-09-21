@@ -55,7 +55,7 @@ export default function Home() {
                         <TabsTrigger value="result">Result</TabsTrigger>
                     </TabsList>
                     <TabsContent value="progress">
-                        <Output>{'progress here'.repeat(100)}</Output>
+                        <Output>Progress here</Output>
                     </TabsContent>
                     <TabsContent value="result">
                         <Output>Result will go here</Output>
