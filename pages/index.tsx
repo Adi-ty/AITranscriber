@@ -8,6 +8,8 @@ import {
     TabsRoot,
     TabsTrigger,
 } from '../components/tabs'
+import { useState } from 'react'
+import { extractVideoIdFromUrl, processVideo } from '../utils/api-client'
 
 const Box = styled('div', {})
 
@@ -41,24 +43,56 @@ const Container = styled('div', {
 })
 
 export default function Home() {
+    const [isProcessing, setProcessing] = useState(false)
+    const [progressOutput, setProgressOutput] = useState('')
+    const [activeTab, setActiveTab] = useState('progress')
+    const [resultTranscript, setResultTranscript] = useState('')
+
+    const handleStartProcessing = async (videoUrl: string) => {
+        const videoId = extractVideoIdFromUrl(videoUrl)
+        if (typeof videoId === 'string') {
+            setResultTranscript('')
+            setProcessing(true)
+
+            const transcriptionInHindi = await processVideo(
+                videoId,
+                message => {
+                    setProgressOutput(prev => prev + message)
+                },
+            )
+
+            if (transcriptionInHindi) {
+                setResultTranscript(transcriptionInHindi)
+            }
+
+            setProcessing(false)
+            setActiveTab('result')
+        } else {
+            alert('Invalid URL')
+        }
+    }
+
     return (
         <Box css={{ paddingY: '$6' }}>
             <Head>
                 <title>AI Transcriber</title>
             </Head>
             <Container size={{ '@initial': '1', '@bp1': '2' }}>
-                <Text as="h1">Translate your transcription with AI</Text>
-                <LinkForm />
-                <TabsRoot defaultValue="progress">
+                <Text as="h1">Translate Transcription with AI</Text>
+                <LinkForm
+                    onSubmit={handleStartProcessing}
+                    isProcessing={isProcessing}
+                />
+                <TabsRoot value={activeTab} onValueChange={setActiveTab}>
                     <TabsList aria-label="Output">
                         <TabsTrigger value="progress">Progress</TabsTrigger>
                         <TabsTrigger value="result">Result</TabsTrigger>
                     </TabsList>
                     <TabsContent value="progress">
-                        <Output>Progress here</Output>
+                        <Output>{progressOutput}</Output>
                     </TabsContent>
                     <TabsContent value="result">
-                        <Output>Result will go here</Output>
+                        <Output>{resultTranscript}</Output>
                     </TabsContent>
                 </TabsRoot>
             </Container>

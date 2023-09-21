@@ -29,9 +29,9 @@ export const TabsTrigger = styled(Tabs.Trigger, {
     userSelect: 'none',
     '&:first-child': { borderTopLeftRadius: 6 },
     '&:last-child': { borderTopRightRadius: 6 },
-    '&:hover': { color: '$purple600' },
+    '&:hover': { color: 'teal' },
     '&[data-state="active"]': {
-        color: '$purple600',
+        color: 'teal',
         boxShadow: 'inset 0 -1px 0 0 currentColor, 0 1px 0 0 currentColor',
     },
 })

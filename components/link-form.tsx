@@ -86,7 +86,7 @@ const inputStyles = {
     backgroundColor: '$gray300',
     boxShadow: `0 0 0 1px $gray400`,
     '&:hover': { boxShadow: `0 0 0 1px $gray600` },
-    '&:focus': { boxShadow: `0 0 0 2px $purple600` },
+    '&:focus': { boxShadow: `0 0 0 2px $teal200` },
     '&::selection': { backgroundColor: '$gray600', color: 'white' },
 }
 
@@ -114,9 +114,9 @@ const Button = styled('button', {
     '&:disabled': {
         opacity: 0.5,
     },
-    backgroundColor: '$purple500',
+    backgroundColor: 'teal',
     color: 'white',
     boxShadow: `0 2px 10px $gray400`,
-    '&:not(:disabled):hover': { backgroundColor: '$purple600' },
+    '&:not(:disabled):hover': { backgroundColor: '$teal200' },
     '&:not(:disabled):focus': { boxShadow: `0 0 0 2px black` },
 })
