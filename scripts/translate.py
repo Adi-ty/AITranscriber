@@ -6,7 +6,7 @@ import pysrt
 openai.api_key = os.getenv("OPENAI_API_KEY")
 input_data = sys.stdin.read()
 subs = pysrt.from_string(input_data)
- 
+
 prompt_base = (
     "Act as world's best language translator. ",
     "Here is a part of transcript of a youtube video. ",
@@ -39,5 +39,4 @@ def translate_text(text):
 
 for index, subtitle in enumerate(subs):
     subtitle.text = translate_text(subtitle.text)
-    print(subtitle)
-
+    print(subtitle, flush=True)
