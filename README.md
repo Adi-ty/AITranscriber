@@ -50,14 +50,14 @@ Before you begin, ensure you have met the following requirements:
 
 ### Example Usage
 
-# Download audio from a YouTube video
+#### Download audio from a YouTube video
 
 `curl -v 'http://localhost:3000/api/audio?videoId={videoId}'`
 
-# Generate a transcript
+#### Generate a transcript
 
 `curl -v POST 'http://localhost:3000/api/transcript?videoId={videoId}'`
 
-# Translate transcript to Hindi
+#### Translate transcript to Hindi
 
 `curl -v -X POST 'http://localhost:3000/api/translate' -H 'Content-Type: text/plain; charset=utf-8' --data-binary @tmp/test.srt`
